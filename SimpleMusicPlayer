@@ -1,0 +1,43 @@
+import ddf.minim.*; //adding song
+Minim minim;
+AudioPlayer song;
+AudioMetaData meta;
+
+HeaderText ht1= new HeaderText(); //adding text on top
+BottomPic bp1 = new BottomPic(); //adding bottom Pics
+
+void setup() {
+  size(500, 500);
+  minim = new Minim(this); //loading song
+  song = minim.loadFile("song0.mp3"); //song I want
+  meta = song.getMetaData(); //getting song info
+}
+  
+void draw() {
+  background(0);
+  //text on screen
+  text(meta.title() + " - The Strokes", 10, 60);
+  text("Press the s key to play | d to pause | f to rewind", 10, 90);
+
+  stroke(255); //creates the "wave"
+    for (int i = 0; i < song.bufferSize() - 1; i++) {
+      float x1 = map( i, 0, song.bufferSize(), 0, width );
+      float x2 = map( i+1, 0, song.bufferSize(), 0, width );
+      line( x1, 200 + song.left.get(i)*200, x2, 200 +  song.left.get(i+1)*160 );
+    }
+
+  //calling header class
+  ht1.display();
+  ht1.move();
+
+  //calling bottomSlides class
+  bp1.display();
+  bp1.move();
+
+}
+
+void keyPressed() {
+  if (key == 's') song.play();
+  if (key == 'd') song.pause();
+  if (key == 'f') song.rewind();
+}
