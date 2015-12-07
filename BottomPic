@@ -1,0 +1,28 @@
+class BottomPic {
+  PImage [] images = new PImage[2];
+  int j = 0;
+  String [] picNames = {"strokePic0.jpg", "strokePic1.jpg"};
+
+  int x = 0;
+  int y = 300;
+
+BottomPic() {
+}
+
+void display(){
+  for(int i = 0; i < images.length; i++){
+  images[i] = loadImage("strokePic" + i + ".jpg"); //concatenation "+" adding to string
+  //println("strokePic" + i + ".jpg");
+  }
+  image(images[j], x, y);
+}
+
+void move() {
+  if (x >= height) {
+  x = 0;
+   j = (j + 1) % images.length;
+    } else {
+      x += 2;
+    }
+  }
+}
