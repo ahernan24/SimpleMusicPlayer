@@ -1,0 +1,29 @@
+class HeaderText {
+  PFont f;
+
+  int x = 0;
+  int y = 30;
+  String [] quotes = {
+    "You Only Live Once", "Twenty-nine different attributes", "Sit me down, shut me up", "I'll get along with you"};
+
+int index;
+
+HeaderText() {
+}
+
+void display() {
+  f = loadFont("ARDESTINE-15.vlw");
+  textFont(f, 20);
+  fill(255);
+  text(quotes[index], x, y);
+}
+
+void move() {
+  if (x >= width) {
+  x = 0;
+  index = (index +1) % quotes.length;
+    } else {
+      x += 1;
+    }
+  }
+}
